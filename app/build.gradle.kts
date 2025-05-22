@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt.android)  // Añadiendo Hilt Inyecciones de dependencias
-    kotlin("kapt")  // Añade esta línea
+    alias(libs.plugins.hilt.android)  // Añadiendo Hilt Inyeccion de dependencias
+    kotlin("kapt")
 }
 
 android {
@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.chesstech.skyegroup"
         minSdk = 23
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -69,5 +69,8 @@ dependencies {
     implementation(libs.hilt.android)
     annotationProcessor(libs.hilt.compiler)  // Para procesamiento de anotaciones
     kapt(libs.hilt.compiler)
-
+    // Room Database
+    implementation (libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
 }

@@ -3,9 +3,9 @@ package com.chesstech.skyegroup.ui.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.chesstech.skyegroup.data.model.TodoModel
 import com.chesstech.skyegroup.domain.GetRandomTodosUseCase
 import com.chesstech.skyegroup.domain.GetTodosUseCase
+import com.chesstech.skyegroup.domain.model.Todo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +18,7 @@ class TodoViewModel @Inject constructor(
 
 ) : ViewModel(){
 
-    val todoModel = MutableLiveData<TodoModel>()
+    val todoModel = MutableLiveData<Todo>()
     val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate() {
@@ -36,14 +36,15 @@ class TodoViewModel @Inject constructor(
     }
 
     fun randomTodo(){ //Recupera un numero aleatorio y se lo pone al viewModel
+        viewModelScope.launch {
+            isLoading.postValue(true)
 
-        isLoading.postValue(true)
+            val quote = getRandomTodosUseCase()
+            if(quote != null){
+                todoModel.postValue(quote)
+            }
 
-        val quote = getRandomTodosUseCase()
-        if(quote != null){
-            todoModel.postValue(quote)
+            isLoading.postValue(false)
         }
-
-        isLoading.postValue(false)
     }
 }

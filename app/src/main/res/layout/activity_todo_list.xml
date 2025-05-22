@@ -4,18 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewContainer"
-    android:background="#E6E6E6"
+    android:background="@color/blueRay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.view.TodoList">
 
     <TextView
-        android:id="@+id/txtIDUser"
+        android:id="@+id/txtNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20sp"
-        android:textColor="@color/blueSkyep"
+        android:textColor="@color/white"
         android:text="@string/app_name"
         android:layout_marginTop="50dp"
         tools:ignore="MissingConstraints"
@@ -25,18 +25,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtNum"
+        android:id="@+id/txtIDUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/app_name"
-        android:textColor="@color/blueSkyep"
+        android:textColor="@color/white"
         android:textSize="20sp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="154dp"
         tools:text="Hello Word!"
-        app:layout_constraintTop_toBottomOf="@+id/txtIDUser"
+        app:layout_constraintTop_toBottomOf="@+id/txtNum"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -46,12 +46,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20sp"
-        android:textColor="@color/blueSkyep"
+        android:textColor="@color/white"
         android:text="@string/app_name"
         android:layout_marginTop="10dp"
         tools:ignore="MissingConstraints"
         tools:text="Hello Word!"
-        app:layout_constraintTop_toBottomOf="@+id/txtNum"
+        app:layout_constraintTop_toBottomOf="@+id/txtIDUser"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -61,11 +61,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20sp"
-        android:textColor="@color/blueSkyep"
+        android:textColor="@color/white"
         android:text="@string/app_name"
         android:layout_marginTop="10dp"
         tools:ignore="MissingConstraints"
         tools:text="Hello Word!"
+        app:buttonTint="@color/red"
+        app:buttonIconTint="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

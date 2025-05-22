@@ -23,7 +23,7 @@ class TodoList : AppCompatActivity() {
         todoViewModel.onCreate()
 
         todoViewModel.todoModel.observe(this, Observer {
-            binding.txtIDUser.text = it.idUser.toString()
+            binding.txtIDUser.text = it.userId.toString()
             binding.txtNum.text = it.id.toString()
             binding.txtTitle.text = it.title
             binding.txtCheckBox.isChecked = it.completed

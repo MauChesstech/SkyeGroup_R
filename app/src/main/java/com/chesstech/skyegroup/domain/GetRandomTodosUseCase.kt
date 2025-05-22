@@ -1,16 +1,13 @@
 package com.chesstech.skyegroup.domain
 
-import com.chesstech.skyegroup.data.model.TodoModel
-import com.chesstech.skyegroup.data.model.TodoProvider
+import com.chesstech.skyegroup.data.model.network.TodoRepository
+import com.chesstech.skyegroup.domain.model.Todo
 import javax.inject.Inject
 
-class GetRandomTodosUseCase @Inject constructor(
+class GetRandomTodosUseCase @Inject constructor(private val repository: TodoRepository) {
 
-    private val todoProvider: TodoProvider
-) {
-
-    operator  fun invoke():TodoModel?{
-        val todos = todoProvider.todos
+    suspend operator fun invoke(): Todo?{
+        val todos = repository.getAllTodosFromDatabase()
 
         if (!todos.isNullOrEmpty()){
             val randomNumber = (todos.indices).random()
