@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.SkyeGroup" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.SkyeGroup" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here.
         <item name="colorPrimary">@color/blueRay</item> -->
 
@@ -8,8 +8,14 @@
         <!-- <item name="colorPrimaryVariant">@color/my_primary_dark</item> -->
         <item name="colorSecondary">@color/blueRay</item>
         <!-- <item name="colorSecondaryVariant">@color/my_secondary_dark</item> -->
-        <!-- Status bar color -->
-        <item name="android:statusBarColor">@color/blueRay</item>
+
+        <!-- Asegúrate de NO incluir fullscreen aquí -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+
+        <!-- Opcional: que se vea bien el contenido debajo del status bar -->
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <style name="Theme.SkyeGroup" parent="Base.Theme.SkyeGroup" />

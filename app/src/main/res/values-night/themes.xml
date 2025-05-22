@@ -3,5 +3,13 @@
     <style name="Base.Theme.SkyeGroup" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+        <!-- Asegúrate de NO incluir fullscreen aquí -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+
+        <!-- Opcional: que se vea bien el contenido debajo del status bar -->
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 </resources>

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Skye Group</string>
     <string name="enter">Entrar</string>
+    <string name="completed">Completo</string>
+    <string name="title">Título: </string>
+    <string name="txtIdUser">ID de Usuario: </string>
+    <string name="txtID">Identificador: </string>
 </resources>

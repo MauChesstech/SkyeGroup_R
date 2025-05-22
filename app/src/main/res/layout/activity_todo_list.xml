@@ -9,68 +9,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.TodoList">
 
-    <TextView
-        android:id="@+id/txtNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:text="@string/app_name"
-        android:layout_marginTop="50dp"
-        tools:ignore="MissingConstraints"
-        tools:text="Hello Word!"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtIDUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="154dp"
-        tools:text="Hello Word!"
-        app:layout_constraintTop_toBottomOf="@+id/txtNum"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:text="@string/app_name"
-        android:layout_marginTop="10dp"
-        tools:ignore="MissingConstraints"
-        tools:text="Hello Word!"
-        app:layout_constraintTop_toBottomOf="@+id/txtIDUser"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <CheckBox
-        android:id="@+id/txtCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:text="@string/app_name"
-        android:layout_marginTop="10dp"
-        tools:ignore="MissingConstraints"
-        tools:text="Hello Word!"
-        app:buttonTint="@color/red"
-        app:buttonIconTint="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTodos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_todo" />
 
     <ProgressBar
         android:id="@+id/idProgress"
@@ -84,3 +27,79 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--
+        <TextView
+            android:id="@+id/txtNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@string/app_name"
+            android:layout_marginTop="50dp"
+            tools:ignore="MissingConstraints"
+            tools:text="Hello Word!"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtIDUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="154dp"
+            tools:text="Hello Word!"
+            app:layout_constraintTop_toBottomOf="@+id/txtNum"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@string/app_name"
+            android:layout_marginTop="10dp"
+            tools:ignore="MissingConstraints"
+            tools:text="Hello Word!"
+            app:layout_constraintTop_toBottomOf="@+id/txtIDUser"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <CheckBox
+            android:id="@+id/txtCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@string/app_name"
+            android:layout_marginTop="10dp"
+            tools:ignore="MissingConstraints"
+            tools:text="Hello Word!"
+            app:buttonTint="@color/red"
+            app:buttonIconTint="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/idProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:backgroundTint="@color/blueSkyep"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout> -->
