@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SkyeGroup" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here.
+        <item name="colorPrimary">@color/blueRay</item> -->
+
+        <item name="colorPrimary">@color/blueRay</item>
+        <!-- <item name="colorPrimaryVariant">@color/my_primary_dark</item> -->
+        <item name="colorSecondary">@color/blueRay</item>
+        <!-- <item name="colorSecondaryVariant">@color/my_secondary_dark</item> -->
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/blueRay</item>
+    </style>
+
+    <style name="Theme.SkyeGroup" parent="Base.Theme.SkyeGroup" />
+</resources>
