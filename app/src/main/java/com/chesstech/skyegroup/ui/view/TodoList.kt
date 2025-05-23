@@ -30,8 +30,16 @@ class TodoList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTodoListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+/*
         updateUI()
+        setupRecyclerView()
+        setupObservers()
+        todoViewModel.onCreate()
+
+        binding.imgRefresh.setOnClickListener {
+            refreshData()
+        } */
+
         setupRecyclerView()
         setupObservers()
         todoViewModel.onCreate()
@@ -49,7 +57,87 @@ class TodoList : AppCompatActivity() {
         overridePendingTransition(0, 0)
     }
 
+    private fun setupObservers() {
+        todoViewModel.todosList.observe(this) { todos ->
+            todos?.let { todoAdapter.submitList(it) }
+        }
 
+        todoViewModel.isLoading.observe(this) { isLoading ->
+            binding.idProgress.isVisible = isLoading
+        }
+
+        todoViewModel.dataSource.observe(this) { source ->
+            updateDataSourceUI(source)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateDataSourceUI(source: TodoViewModel.DataSource) {
+        val (message, colorRes) = when (source) {
+            is TodoViewModel.DataSource.API -> Pair(
+                "Datos obtenidos desde la API...",
+                R.color.green
+            )
+            is TodoViewModel.DataSource.Local -> Pair(
+                "Datos almacenados localmente (Modo offline)...",
+                if (isInternetAvailable(this)) {
+                    R.color.green
+                } else {
+                    Toast.makeText(this, "Sin conexión a internet", Toast.LENGTH_SHORT).show()
+                    R.color.red
+                }
+            )
+            is TodoViewModel.DataSource.Empty -> Pair(
+                "Lista vacía. No hay datos disponibles",
+                R.color.red
+            )
+        }
+
+        binding.txtMessage.text = message
+        binding.imgWifi.imageTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(this, colorRes)
+        )
+
+        // Actualiza el estado de los botones según el origen
+        todoAdapter.setButtonsEnabled(source is TodoViewModel.DataSource.Local)
+    }
+
+    private fun setupRecyclerView() {
+        todoAdapter = TodoAdapter(
+            onDeleteClicked = { todo ->
+                functionAlert(todo)
+            },
+            onCheckClicked = { updatedTodo ->
+                todoViewModel.updateTodo(updatedTodo)
+            }/* ,
+            btnHabilitados = !isInternetAvailable(this) Control de botones de acuerdo al estado del Internet */
+        )
+
+        binding.recyclerViewTodos.apply {
+            layoutManager = LinearLayoutManager(this@TodoList)
+            setHasFixedSize(true)
+            adapter = todoAdapter
+        }
+    }
+
+    private fun functionAlert(todo: Todo) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(title)
+            .setMessage("¿Seguro que deseas eliminar este registro?")
+            .setPositiveButton("Sí") { _, _ ->
+                todoViewModel.deleteTodo(todo)
+                Toast.makeText(this, "Eliminado!", Toast.LENGTH_SHORT).show()
+                todoViewModel.onCreate()
+            }
+            .setNegativeButton("No") { _, _ ->
+                Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show()
+            }
+            .create()
+            .show()
+    }
+}
+
+/*
     @SuppressLint("SetTextI18n")
     private fun updateUI() {
         if (isInternetAvailable(this)) {   /* Avisar que no hay conexión a internet */
@@ -107,4 +195,4 @@ class TodoList : AppCompatActivity() {
             binding.idProgress.isVisible = isLoading
         }
     }
-}
+}*/

@@ -12,6 +12,7 @@ import com.chesstech.skyegroup.domain.model.Todo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.sql.DataSource
 
 @HiltViewModel
 class TodoViewModel @Inject constructor(
@@ -23,17 +24,32 @@ class TodoViewModel @Inject constructor(
     private val _todosList = MutableLiveData<List<Todo>>()
     val todosList: LiveData<List<Todo>> get() = _todosList
 
+    private val _dataSource = MutableLiveData<DataSource>()
+    val dataSource: LiveData<DataSource> get() = _dataSource
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
+    sealed class DataSource {
+        data object API : DataSource()
+        data object Local : DataSource()
+        data object Empty : DataSource()
+    }
+
     fun onCreate() {
         viewModelScope.launch {
+            _isLoading.value = true
             try {
-                _isLoading.value = true
                 val result = getTodosUseCase()
                 _todosList.value = result
+                _dataSource.value = when {
+                    result.isEmpty() -> DataSource.Empty
+                    result.any { it.isFromApi } -> DataSource.API
+                    else -> DataSource.Local
+                }
             }
             catch (e: Exception) {
+                _dataSource.value = DataSource.Local
                 Log.e("TodoViewModel", "Error: ", e)
             }
             finally {
