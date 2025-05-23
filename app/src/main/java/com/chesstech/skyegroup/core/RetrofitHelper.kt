@@ -7,7 +7,7 @@ object RetrofitHelper {
 
     fun getRetrofit(): Retrofit{
         return Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")   //Liga del JSON
+            .baseUrl("https://jsonplaceholder.typicode.com/")   /* Liga del JSON */
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

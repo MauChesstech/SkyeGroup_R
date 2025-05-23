@@ -10,15 +10,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class) //alcance a nivel de aplicación
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    //proveer retrofit
-    @Singleton //para mantener una única instancia de retrofit
+    /* Proveedor Retrofit */
+    @Singleton /* Mantengo una única instancia de retrofit */
     @Provides
     fun provideRetrofit(): Retrofit{
         return Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")   //Liga del JSON
+            .baseUrl("https://jsonplaceholder.typicode.com/")   /* Liga del JSON */
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

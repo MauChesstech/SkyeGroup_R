@@ -5,7 +5,7 @@
     <!-- Cuando el botón está deshabilitado -->
     <item android:color="@color/gray" android:state_enabled="false" />
 
-    <!-- Cuando el botón está habilitado, dejé el color original del diseño -->
+    <!-- Cuando el botón está habilitado -->
     <item android:color="@color/blueSkyep" />
 
 </selector>

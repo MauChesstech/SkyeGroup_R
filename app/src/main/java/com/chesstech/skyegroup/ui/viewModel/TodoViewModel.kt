@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chesstech.skyegroup.data.model.network.TodoRepository
 import com.chesstech.skyegroup.domain.DeleteTodoUseCase
 import com.chesstech.skyegroup.domain.GetTodosUseCase
 import com.chesstech.skyegroup.domain.UpdateTodoUseCase
@@ -12,13 +13,12 @@ import com.chesstech.skyegroup.domain.model.Todo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.sql.DataSource
 
 @HiltViewModel
 class TodoViewModel @Inject constructor(
     private val getTodosUseCase: GetTodosUseCase,
     private val deleteTodoUseCase: DeleteTodoUseCase,
-    private val updateTodoUseCase: UpdateTodoUseCase
+    private val repository: TodoRepository
 ) : ViewModel() {
 
     private val _todosList = MutableLiveData<List<Todo>>()
@@ -71,16 +71,13 @@ class TodoViewModel @Inject constructor(
         }
     }
 
-    fun updateTodo(todo: Todo) {
+    fun updateTodoStatus(todoId: Int, isChecked: Boolean) {
+        _todosList.value = _todosList.value?.map { todo ->
+            if (todo.id == todoId) todo.copy(completed = isChecked) else todo
+        }
+
         viewModelScope.launch {
-            try {
-                _isLoading.value = true
-                updateTodoUseCase(todo)
-            } catch (e: Exception) {
-                Log.e("TodoViewModel", "Error: ", e)
-            } finally {
-                _isLoading.value = false
-            }
+            repository.updateTodoStatus(todoId, isChecked)
         }
     }
 }

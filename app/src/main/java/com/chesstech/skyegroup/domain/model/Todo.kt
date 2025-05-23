@@ -11,6 +11,7 @@ data class Todo (
     val isFromApi: Boolean = false
 )
 
+    /* Mapeo de API a dominio */
 fun TodoModel.toDonain() = Todo(
     userId, id, title, completed, isFromApi = true
 )

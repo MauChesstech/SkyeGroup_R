@@ -11,19 +11,22 @@ import com.chesstech.skyegroup.data.model.databaseEntities.TodoEntities
 @Dao
 interface TodoDao {
 
-    @Query("SELECT * FROM table_skye_group ORDER BY id ASC")   //Ordenar la base de datos al recuperar la información
+    @Query("SELECT * FROM table_skye_group ORDER BY id ASC")   /* Ordeno la base de datos al recuperar la información */
     suspend fun getAllTodo(): List<TodoEntities>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)    //Si al insertar los campos manda error, se reemplazará el valor
+    @Insert(onConflict = OnConflictStrategy.REPLACE)    /* Si al insertar los campos manda error, se reemplazará el valor */
     suspend fun insertAll(todo: List<TodoEntities>)
 
-    @Query("DELETE FROM table_skye_group")
+    @Query("DELETE FROM table_skye_group")  /* Para la limpieza de la tabla */
     suspend fun deleteAllTodo()
 
     @Delete
-    suspend fun deleteItemTodo(todo: TodoEntities) // Esto borra solo el ítem recibido
+    suspend fun deleteItemTodo(todo: TodoEntities) /* Para borrar solo el ítem recibido */
 
     @Update
-    suspend fun updateTodo(todo: TodoEntities)
+    suspend fun updateTodo(todo: TodoEntities) /* Para actualizar toda la información localmente */
+
+    @Query("UPDATE table_skye_group SET completed = :completed WHERE id = :id") /* Para actualizar 1 registro localmente de manera inmediata */
+    suspend fun updateTodoStatus(id: Int, completed: Boolean)
 }
 

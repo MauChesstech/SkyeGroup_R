@@ -3,5 +3,6 @@ package com.chesstech.skyegroup
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp //Implementando las inyecciones de dependencias
+    /* Para implementación de las inyecciones de dependencias */
+@HiltAndroidApp
 class SkyeGroupApp: Application()

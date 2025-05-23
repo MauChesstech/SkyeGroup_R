@@ -1,7 +1,5 @@
 package com.chesstech.skyegroup.data.model.network
 
-import dagger.hilt.android.qualifiers.ApplicationContext
-import android.content.Context
 import com.chesstech.skyegroup.data.model.TodoModel
 import com.chesstech.skyegroup.data.model.databaseEntities.Dao.TodoDao
 import com.chesstech.skyegroup.data.model.databaseEntities.TodoEntities
@@ -10,11 +8,9 @@ import com.chesstech.skyegroup.domain.model.Todo
 import com.chesstech.skyegroup.domain.model.toDonain
 import javax.inject.Inject
 
-class TodoRepository @Inject constructor(
-        /* Inyectando dependencias de casos de uso */
+class TodoRepository @Inject constructor(        /* Inyectando dependencias de casos de uso */
     private val api: TodoService,
-    private val todoDao: TodoDao,
-    @ApplicationContext private val context: Context
+    private val todoDao: TodoDao
 ) {
 
     suspend fun getAllTodosFromApi(): List<Todo> {  /* Retornará toda la información de la API */
@@ -31,7 +27,7 @@ class TodoRepository @Inject constructor(
         todoDao.insertAll(todos)
     }
 
-    suspend fun clearTodos() {
+    suspend fun clearTodos() {  /* Limpiar la información */
         todoDao.deleteAllTodo()
     }
 
@@ -42,5 +38,9 @@ class TodoRepository @Inject constructor(
 
     suspend fun updateTodo(todos: Todo) {
         todoDao.updateTodo(todos.toDatabase())
+    }
+
+    suspend fun updateTodoStatus(todoId: Int, completed: Boolean) {
+        todoDao.updateTodoStatus(todoId, completed)
     }
 }

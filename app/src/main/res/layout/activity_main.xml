@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#002461"
+    android:background="@color/blueRay"
     tools:context=".ui.view.MainActivity">
 
     <ImageView
@@ -26,9 +26,9 @@
         android:id="@+id/btnInit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#01D4FE"
+        android:backgroundTint="@color/blueSkyep"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textAllCaps="true"
         android:text="@string/enter"
         android:layout_marginBottom="150dp" />
