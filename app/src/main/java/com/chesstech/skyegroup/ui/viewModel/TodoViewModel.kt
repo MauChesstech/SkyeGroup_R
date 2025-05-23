@@ -5,54 +5,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chesstech.skyegroup.data.model.network.TodoRepository
+import com.chesstech.skyegroup.domain.DeleteTodoUseCase
 import com.chesstech.skyegroup.domain.GetTodosUseCase
+import com.chesstech.skyegroup.domain.UpdateTodoUseCase
 import com.chesstech.skyegroup.domain.model.Todo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-/*
-@HiltViewModel
-class TodoViewModel @Inject constructor(
-        //Inyectando dependencias de casos de uso
-    private val getTodoUseCase: GetTodosUseCase,
-    private val getRandomTodosUseCase: GetRandomTodosUseCase
-
-) : ViewModel(){
-
-    val todoModel = MutableLiveData<Todo>()
-    val isLoading = MutableLiveData<Boolean>()
-
-    fun onCreate() {
-
-        viewModelScope.launch {
-            isLoading.postValue(true)
-
-            val result = getTodoUseCase()
-
-            if (result.isNotEmpty()){
-                todoModel.postValue(result[0])
-                isLoading.postValue(false)
-            }
-        }
-    }
-
-    fun randomTodo(){ //Recupera un numero aleatorio y se lo pone al viewModel
-        viewModelScope.launch {
-            isLoading.postValue(true)
-
-            val quote = getRandomTodosUseCase()
-            if(quote != null){
-                todoModel.postValue(quote)
-            }
-
-            isLoading.postValue(false)
-        }
-    }
-} */
 
 @HiltViewModel
 class TodoViewModel @Inject constructor(
-    private val getTodosUseCase: GetTodosUseCase
+    private val getTodosUseCase: GetTodosUseCase,
+    private val deleteTodoUseCase: DeleteTodoUseCase,
+    private val updateTodoUseCase: UpdateTodoUseCase,
+    private val repository: TodoRepository
 ) : ViewModel() {
 
     private val _todosList = MutableLiveData<List<Todo>>()
@@ -67,9 +34,58 @@ class TodoViewModel @Inject constructor(
                 _isLoading.value = true
                 val result = getTodosUseCase()
                 _todosList.value = result
+            }
+            catch (e: Exception) {
+                Log.e("TodoViewModel", "Error: ", e)
+            }
+            finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun deleteTodo(todo: Todo) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                deleteTodoUseCase(todo)
             } catch (e: Exception) {
-                // Manejo de errores
-                Log.e("TodoViewModel", "Error fetching todos", e)
+                Log.e("TodoViewModel", "Error: ", e)
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun updateTodo(todo: Todo) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                updateTodoUseCase(todo)
+            } catch (e: Exception) {
+                Log.e("TodoViewModel", "Error: ", e)
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+/*
+    fun updateTodo(updatedTodo: Todo) {
+        viewModelScope.launch {
+            // Guarda con timestamp actual
+            repository.updateTodo(updatedTodo.toEntity())
+        }
+    }*/
+
+    fun updateTodoStatus(todo: Todo, isChecked: Boolean) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                val updatedTodo = todo.copy(completed = isChecked)
+                repository.updateTodo(updatedTodo)
+                /* No se necesita recargar toda la lista */
+            } catch (e: Exception) {
+                Log.e("TodoViewModel", "Error: ", e)
             } finally {
                 _isLoading.value = false
             }

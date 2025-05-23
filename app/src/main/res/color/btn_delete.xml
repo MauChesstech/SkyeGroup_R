@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Cuando el botón está deshabilitado -->
+    <item android:color="@color/gray" android:state_enabled="false" />
+
+    <!-- Cuando el botón está habilitado, dejé el color original del diseño -->
+    <item android:color="@color/red" />
+
+</selector>

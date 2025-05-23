@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +7,44 @@
     android:background="@color/blueRay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.view.TodoList">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        <ImageView
+            android:id="@+id/imgWifi"
+            android:src="@drawable/ic_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            app:tint="@color/green"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="@string/app_name"
+            android:padding="5dp"
+            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/imgRefresh"
+            android:src="@drawable/ic_replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            app:tint="@color/blueSkyep"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTodos"
@@ -26,7 +63,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
     <!--
         <TextView
             android:id="@+id/txtNum"

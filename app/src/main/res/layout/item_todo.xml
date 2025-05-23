@@ -79,23 +79,24 @@
             android:layout_height="wrap_content" >
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:id="@+id/Delete"
+                android:id="@+id/btnDelete"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:drawableTint="@color/red"
+                android:drawableTint="@color/btn_delete"
                 android:drawableBottom="@drawable/ic_delete" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+
             <CheckBox
                 android:id="@+id/txtCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/completed"
+                android:text="@string/incomplete"
                 android:textColor="@color/black"
-                app:buttonTint="@color/blueSkyep"
-                app:buttonIconTint="@color/white" />
+                app:buttonIconTint="@color/white"
+                app:buttonTint="@color/btn_checkbox" />
         </LinearLayout>
 
     </LinearLayout>

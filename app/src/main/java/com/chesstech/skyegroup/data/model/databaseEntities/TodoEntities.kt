@@ -7,9 +7,9 @@ import com.chesstech.skyegroup.domain.model.Todo
 
 @Entity(tableName = "table_skye_group")
 data class TodoEntities (
-    @PrimaryKey(autoGenerate = true)
+    //@PrimaryKey(autoGenerate = true)
     @ColumnInfo("userId") val userId: Int,
-    @ColumnInfo("id") val id: Int,
+    @PrimaryKey @ColumnInfo("id") val id: Int,
     @ColumnInfo("title") val title: String,
     @ColumnInfo("completed") val completed: Boolean
 )
