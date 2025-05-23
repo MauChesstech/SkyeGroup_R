@@ -1,7 +1,6 @@
 package com.chesstech.skyegroup.adapter
 
 import android.annotation.SuppressLint
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -47,10 +46,6 @@ class TodoAdapter(
                 txtCheckBox.isEnabled = btnHabilitados
 
                 btnDelete.setOnClickListener { onDeleteClicked(todo) }
-/*
-                txtCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                    onCheckClicked(todo.copy(completed = isChecked))
-                }*/
 
                 txtCheckBox.setOnCheckedChangeListener { _, isChecked ->
                     // Actualiza el texto inmediatamente

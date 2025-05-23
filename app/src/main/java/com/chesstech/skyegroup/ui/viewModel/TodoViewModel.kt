@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.chesstech.skyegroup.data.model.network.TodoRepository
 import com.chesstech.skyegroup.domain.DeleteTodoUseCase
 import com.chesstech.skyegroup.domain.GetTodosUseCase
 import com.chesstech.skyegroup.domain.UpdateTodoUseCase
@@ -18,8 +17,7 @@ import javax.inject.Inject
 class TodoViewModel @Inject constructor(
     private val getTodosUseCase: GetTodosUseCase,
     private val deleteTodoUseCase: DeleteTodoUseCase,
-    private val updateTodoUseCase: UpdateTodoUseCase,
-    private val repository: TodoRepository
+    private val updateTodoUseCase: UpdateTodoUseCase
 ) : ViewModel() {
 
     private val _todosList = MutableLiveData<List<Todo>>()
@@ -62,28 +60,6 @@ class TodoViewModel @Inject constructor(
             try {
                 _isLoading.value = true
                 updateTodoUseCase(todo)
-            } catch (e: Exception) {
-                Log.e("TodoViewModel", "Error: ", e)
-            } finally {
-                _isLoading.value = false
-            }
-        }
-    }
-/*
-    fun updateTodo(updatedTodo: Todo) {
-        viewModelScope.launch {
-            // Guarda con timestamp actual
-            repository.updateTodo(updatedTodo.toEntity())
-        }
-    }*/
-
-    fun updateTodoStatus(todo: Todo, isChecked: Boolean) {
-        viewModelScope.launch {
-            try {
-                _isLoading.value = true
-                val updatedTodo = todo.copy(completed = isChecked)
-                repository.updateTodo(updatedTodo)
-                /* No se necesita recargar toda la lista */
             } catch (e: Exception) {
                 Log.e("TodoViewModel", "Error: ", e)
             } finally {

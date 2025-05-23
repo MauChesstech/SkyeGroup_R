@@ -17,24 +17,17 @@ class TodoRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
 
-    suspend fun getAllTodosFromApi(): List<Todo> {
-        /* if (NetworkUtils.isInternetAvailable(context)) {
-            val response: List<TodoModel> = api.getTodos()
-            return response.map { it.toDonain() }
-        } else {
-            val response: List<TodoEntities> = todoDao.getAllTodo()
-            return response.map { it.toDonain() }
-        } */
+    suspend fun getAllTodosFromApi(): List<Todo> {  /* Retornará toda la información de la API */
         val response: List<TodoModel> = api.getTodos()
         return response.map { it.toDonain() }
     }
 
-    suspend fun getAllTodosFromDatabase(): List<Todo> {
+    suspend fun getAllTodosFromDatabase(): List<Todo> {  /* Retornará toda la información de la DB local */
         val response: List<TodoEntities> = todoDao.getAllTodo()
         return response.map { it.toDonain() }
     }
 
-    suspend fun insertTodos(todos: List<TodoEntities>) {
+    suspend fun insertTodos(todos: List<TodoEntities>) {    /* Inserción de los datos en las listas */
         todoDao.insertAll(todos)
     }
 

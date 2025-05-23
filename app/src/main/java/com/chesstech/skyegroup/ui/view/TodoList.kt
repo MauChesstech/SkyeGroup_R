@@ -37,13 +37,18 @@ class TodoList : AppCompatActivity() {
         todoViewModel.onCreate()
 
         binding.imgRefresh.setOnClickListener {
-            val intent = intent
-            finish()
-            overridePendingTransition(0, 0) // Sin animación de cierre
-            startActivity(intent)
-            overridePendingTransition(0, 0) // Sin animación de inicio
+            refreshData()
         }
     }
+
+    private fun refreshData() {
+        val intent = intent
+        finish()
+        overridePendingTransition(0, 0)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun updateUI() {
@@ -76,25 +81,7 @@ class TodoList : AppCompatActivity() {
             adapter = todoAdapter
         }
     }
-    /*
-        private fun setupRecyclerView() {
-            todoAdapter = TodoAdapter(
-                onDeleteClicked = { todo ->
-                    functionAlert(todo)
-                },
-                onCheckClicked = { updatedTodo, isChecked ->
-                    // Solo actualiza el estado en el ViewModel
-                    todoViewModel.updateTodoStatus(updatedTodo, isChecked)
-                },
-                btnHabilitados = !isInternetAvailable(this) /* Control de botones de acuerdo al estado del Internet */
-            )
 
-            binding.recyclerViewTodos.apply {
-                layoutManager = LinearLayoutManager(this@TodoList)
-                adapter = todoAdapter
-            }
-        }
-     */
     private fun functionAlert(todo: Todo) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(title)
